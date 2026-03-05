@@ -1,0 +1,51 @@
+# PageRank Algorithm Simulator
+
+An interactive simulation of Google's PageRank algorithm built with Streamlit — presented at a college-level Math Coding competition where it won **1st Place**.
+
+## What it does
+
+PageRank is the algorithm Google originally used to rank websites by importance. This app simulates it on a scaled-down "internet" of 4 websites.
+
+- Click the website buttons to simulate browsing history
+- The app builds a **transition matrix** from your click sequence
+- Applies **damping factor normalization** (d = 0.85, just like Google's original formula)
+- Runs **10 iterations of matrix-vector multiplication** to find the dominant eigenvector
+- The final eigenvector represents each site's "rank" — displayed as a bar chart
+
+## The Math
+
+The core formula:
+
+$$R_i = \frac{1-d}{N} + d \cdot A_i$$
+
+Where:
+- `d` = damping factor (0.85)
+- `N` = total number of websites
+- `A` = transition matrix built from browsing history
+
+The dominant eigenvector is found by iteratively applying:
+
+$$A^T v = \lambda v$$
+
+Until the vector stabilizes (λ = 1).
+
+## Tech Stack
+
+- **Python**
+- **Streamlit** — interactive UI
+- **NumPy** — matrix operations and eigenvector computation
+- **Pandas** — data handling
+
+## How to Run
+```bash
+pip install streamlit numpy pandas
+streamlit run main.py
+```
+
+Then open `http://localhost:8501` in your browser.
+
+## Limitations & Future Scope
+
+- Currently limited to 4 nodes (websites)
+- Dangling node problem not handled
+- Could be extended to arbitrary graph sizes with NetworkX
